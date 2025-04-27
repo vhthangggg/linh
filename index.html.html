@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chào Phương Linh!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a1a2e;
+            --primary-color: #ff7eb9;
+            --secondary-color: #00f5d4;
+            --text-color: #e6e6e6;
+            --secondary-text: #b8b8e0;
+            --glow-color: rgba(255, 126, 185, 0.5);
+            --soft-highlight: #ffabe1;
+        }
+
+        body {
+            background: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 12s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 0.5; }
+            50% { transform: translateY(-40vh) scale(1.3); opacity: 0.2; }
+            100% { transform: translateY(0) scale(1); opacity: 0.5; }
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--secondary-text) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: -1;
+            animation: moveBackground 80s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            from { background-position: 0 0; }
+            to { background-position: 400px 400px; }
+        }
+
+        .container {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 35px 40px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 0 20px var(--glow-color), 0 0 5px var(--secondary-text) inset;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1.2s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px var(--glow-color), 0 0 10px var(--primary-color) inset;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 12px var(--glow-color);
+            animation: pulseGlow 2.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 10px var(--glow-color); opacity: 0.9; }
+            to { text-shadow: 0 0 18px var(--glow-color); opacity: 1; }
+        }
+
+        .header p {
+            color: var(--secondary-text);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .status-check {
+            font-family: 'Roboto Mono', monospace;
+            text-align: left;
+            margin-bottom: 30px;
+            border-left: 3px solid var(--primary-color);
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 0 5px 5px 0;
+        }
+
+        .status-check p {
+            margin: 8px 0;
+            font-size: 0.95em;
+            color: var(--secondary-text);
+            opacity: 0;
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .status-check p:nth-child(1) { animation-delay: 0.6s; }
+        .status-check p:nth-child(2) { animation-delay: 0.9s; }
+        .status-check p:nth-child(3) { animation-delay: 1.2s; }
+        .status-check p:nth-child(4) { animation-delay: 1.5s; }
+        .status-check p:nth-child(5) { animation-delay: 1.8s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .status-check strong {
+            color: var(--primary-color);
+            font-weight: 400;
+        }
+
+        .status-check .status-ok {
+            color: var(--soft-highlight);
+            font-weight: bold;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.8s forwards;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 5px;
+            background: var(--primary-color);
+            animation: progress 2s ease-in-out forwards;
+            animation-delay: 1.8s;
+        }
+
+        @keyframes progress {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .message {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.2s forwards;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-shadow: 0 0 6px var(--glow-color);
+        }
+
+        .flirt-container {
+            min-height: 80px;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .flirt-line {
+            font-style: italic;
+            color: var(--secondary-text);
+            font-size: 1.05em;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .flirt-line.active {
+            opacity: 1;
+        }
+
+        .icon {
+            font-size: 2.2em;
+            color: var(--soft-highlight);
+            margin-top: 25px;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3.2s forwards, gentleBounce 2.5s infinite ease-in-out 3.2s;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .message {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <div class="container" role="main">
+        <div class="header">
+            <h1 id="greeting-title">Chào Phương Linh!</h1>
+            <p id="greeting-subtitle">Như ánh bình minh trên vịnh Hạ Long...</p>
+        </div>
+
+        <div class="status-check">
+            <p><strong>[CẢM BIẾN]:</strong> Ghi nhận tín hiệu quen thuộc...</p>
+            <p><strong>[ĐỊNH VỊ]:</strong> Nguồn phát <strong>'Phương Linh'</strong> đang ở <strong>Hạ Long</strong>.</p>
+            <p id="energy-level"><strong>[PHÂN TÍCH]:</strong> Năng lượng 'vui vẻ' khuếch tán <span style="color: var(--soft-highlight);">+18%</span> ✨.</p>
+            <p id="system-status"><strong>[TRẠNG THÁI]:</strong> Bầu không khí: <strong class="status-ok">Ấm Áp & Bừng Sáng!</strong></p>
+            <p><strong>[ĐỒNG BỘ]:</strong> Kết nối năng lượng hoàn tất:</p>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="message" id="main-message">
+            Hạ Long hôm nay thật đẹp, như chính nụ cười của bạn vậy.
+        </div>
+        
+        <div class="flirt-container">
+            <div class="flirt-line" id="flirt-message-1">Chắc hẳn Hạ Long đã gửi gắm chút nắng gió vào nụ cười của bạn phải không? 😉</div>
+            <div class="flirt-line" id="flirt-message-2">Nụ cười bạn như làn gió biển, mát lành và đầy sức sống. 🌊</div>
+            <div class="flirt-line" id="flirt-message-3">Mỗi ngày bên bạn là một ngày Hạ Long thêm rạng rỡ. ✨</div>
+        </div>
+
+        <div class="icon" aria-label="Biểu tượng ngôi sao lấp lánh">✨</div>
+    </div>
+
+    <script>
+        // Particle Effect
+        const particleContainer = document.getElementById('particles');
+        const numParticles = 20;
+
+        for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.width = `${Math.random() * 4 + 2}px`;
+            particle.style.height = particle.style.width;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            particle.style.animationDelay = `${Math.random() * 6}s`;
+            particleContainer.appendChild(particle);
+        }
+
+        // Determine greeting based on time of day
+        const hour = new Date().getHours();
+        let timeGreeting = "";
+        if (hour >= 5 && hour < 11) {
+            timeGreeting = "Buổi Sáng";
+        } else if (hour >= 11 && hour < 14) {
+            timeGreeting = "Buổi Trưa";
+        } else if (hour >= 14 && hour < 18) {
+            timeGreeting = "Buổi Chiều";
+        } else {
+            timeGreeting = "Buổi Tối";
+        }
+
+        // Random Content Generator
+        const contentVariations = [
+            {
+                baseTitle: `Chào ${timeGreeting}, Phương Linh!`,
+                subtitle: "Như ánh bình minh trên vịnh Hạ Long...",
+                energy: "Năng lượng 'vui vẻ' khuếch tán <span style='color: var(--soft-highlight);'>+18%</span> ✨.",
+                status: "Ấm Áp & Bừng Sáng!",
+                message: "Hạ Long hôm nay thật đẹp, như chính nụ cười của bạn vậy."
+            },
+            {
+                baseTitle: `Chào ${timeGreeting}, Phương Linh Yêu Quý!`,
+                subtitle: "Hạ Long rực rỡ hơn khi bạn thức dậy...",
+                energy: "Năng lượng 'hạnh phúc' lan tỏa <span style='color: var(--soft-highlight);'>+20%</span> 🌸.",
+                status: "Dịu Dàng & Lung Linh!",
+                message: "Sự hiện diện của bạn làm Hạ Long như được phủ ánh sáng dịu dàng."
+            },
+            {
+                baseTitle: `Chào ${timeGreeting}, Phương Linh Ơi!`,
+                subtitle: "Một ngày mới sáng bừng nhờ bạn...",
+                energy: "Năng lượng 'tích cực' tăng vọt <span style='color: var(--soft-highlight);'>+22%</span> ☀️.",
+                status: "Tươi Sáng & Quyến Rũ!",
+                message: "Hạ Long hôm nay đẹp hơn bao giờ hết, nhờ có bạn ở đây."
+            },
+            {
+                baseTitle: `Chào ${timeGreeting}, Phương Linh Dịu Dàng!`,
+                subtitle: "Hạ Long chào đón bạn bằng những tia nắng ấm áp...",
+                energy: "Năng lượng 'yêu thương' lan tỏa <span style='color: var(--soft-highlight);'>+19%</span> 💖.",
+                status: "Ngọt Ngào & Hạnh Phúc!",
+                message: "Bạn như bông hoa nở giữa Hạ Long, làm mọi thứ trở nên rực rỡ."
+            }
+        ];
+
+        // Select a random content variation
+        const randomContent = contentVariations[Math.floor(Math.random() * contentVariations.length)];
+
+        // Update the DOM with the selected content
+        document.getElementById('greeting-title').textContent = randomContent.baseTitle;
+        document.getElementById('greeting-subtitle').textContent = randomContent.subtitle;
+        document.getElementById('energy-level').innerHTML = `<strong>[PHÂN TÍCH]:</strong> ${randomContent.energy}`;
+        document.getElementById('system-status').innerHTML = `<strong>[TRẠNG THÁI]:</strong> Bầu không khí: <strong class="status-ok">${randomContent.status}</strong>`;
+        document.getElementById('main-message').innerHTML = randomContent.message;
+
+        // Rotating flirt messages
+        const flirtMessages = [
+            "Chắc hẳn Hạ Long đã gửi gắm chút nắng gió vào nụ cười của bạn phải không? 😉",
+            "Nụ cười bạn như làn gió biển, mát lành và đầy sức sống. 🌊",
+            "Mỗi ngày bên bạn là một ngày Hạ Long thêm rạng rỡ. ✨",
+            "Bạn là ánh sáng dịu dàng nhất của Hạ Long hôm nay. 💫",
+            "Nụ cười ấy tựa ánh bạc trên sóng, khiến lòng ai bỗng lạc lối đôi phen.",
+            "Nàng tốt bụng, dịu dàng, cười một cái khiến Hạ Long cũng thầm ganh.",
+            "Tâm hồn nàng tốt đẹp, nụ cười như ngọc, ai may mắn được ngắm đây?"
+        ];
+
+        // Initialize flirt messages
+        const flirtContainer = document.querySelector('.flirt-container');
+        let currentFlirtIndex = 0;
+
+        function showNextFlirt() {
+            // Hide all flirt messages
+            document.querySelectorAll('.flirt-line').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show current flirt message
+            const flirtElements = document.querySelectorAll('.flirt-line');
+            flirtElements[currentFlirtIndex % flirtElements.length].classList.add('active');
+            
+            // Update text for all flirt elements in rotation
+            for (let i = 0; i < flirtElements.length; i++) {
+                const nextIndex = (currentFlirtIndex + i) % flirtMessages.length;
+                flirtElements[i].textContent = flirtMessages[nextIndex];
+            }
+            
+            currentFlirtIndex++;
+            
+            // Schedule next change
+            setTimeout(showNextFlirt, 5000);
+        }
+
+        // Start the rotation after initial animations
+        setTimeout(() => {
+            document.querySelector('.flirt-line').classList.add('active');
+            setTimeout(showNextFlirt, 5000);
+        }, 3500);
+    </script>
+</body>
+</html>
